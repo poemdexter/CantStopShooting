@@ -3,17 +3,18 @@ using System.Collections;
 
 public class MoveBullet : MonoBehaviour
 {
-    public GameObject impact;
-    public float speed;
-    private float killTime;
+    public GameObject impact; // impact animation object
+    public float speed;       // velocity of bullet
     
     void Start()
     {
+        // move bullet
         rigidbody2D.velocity = Vector2.right * speed;
     }
     
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // if collide with surface, create impact object at point of contact
         if (collision.collider.CompareTag("Surface")) {
             Instantiate(impact, collision.contacts[0].point, transform.rotation);
             Destroy(gameObject);
