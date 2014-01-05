@@ -20,10 +20,15 @@ public class FireWeapon : MonoBehaviour
         
         if ((currentTime += Time.deltaTime) > fireDelay) {
             currentTime = 0;
-            Instantiate(bullet, transform.position + new Vector3(renderer.bounds.size.x, 0, 0), Quaternion.identity);
+            Instantiate(bullet, transform.position + new Vector3(renderer.bounds.size.x, 0, 0), transform.rotation * GetAccuracyRotation());
             audio.Play();
             transform.Translate(new Vector2(-.1f, 0));
             fired = true;
         }
+    }
+    
+    Quaternion GetAccuracyRotation()
+    {
+        return Quaternion.Euler(0, 0, Random.Range(-2, 2));
     }
 }

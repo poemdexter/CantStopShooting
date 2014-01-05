@@ -3,15 +3,20 @@ using System.Collections;
 
 public class MoveBullet : MonoBehaviour
 {
+    public GameObject impact;
     public float speed;
-    
     private float killTime;
     
-    void Update()
+    void Start()
     {
-        transform.Translate(new Vector2(speed, 0) * Time.deltaTime);
-        
-        if ((killTime += Time.deltaTime) > 1.0f)
+        rigidbody2D.velocity = Vector2.right * speed;
+    }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Surface")) {
+            Instantiate(impact, collision.contacts[0].point, transform.rotation);
             Destroy(gameObject);
+        }
     }
 }
