@@ -9,7 +9,7 @@ public class MoveBullet : MonoBehaviour
     void Start()
     {
         // move bullet
-        rigidbody2D.velocity = Vector2.right * speed;
+        rigidbody2D.velocity = transform.right * speed;
     }
     
     void OnCollisionEnter2D(Collision2D collision)
